@@ -1,8 +1,17 @@
 # File Mirror
 
+Mirror files locally. Intended for one-way syncing from a working directory on
+your computer to a folder that syncs with the cloud for backup purposes. This
+prevents the cloud provider from changing the file while you are working on it,
+which is problematic with certain programs. Today, this program ignores changes
+from the cloud provider (just for backup), but it can be extended to warn or
+sync back changes on-demand (e.g. when it is safe to do so).
+
+![Usage diagram](./docs/usage.drawio.svg)
+
 ## Getting Started
 
-Create a config file at `~/Desktop/sync_config.json` with the following
+Create a config file at `~/.config/file_mirror/sync_config.json` with the following
 contents:
 
 ```json
