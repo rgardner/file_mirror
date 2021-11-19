@@ -9,22 +9,22 @@ contents:
 {
     "copy_specs": [
         {
-            "src": "input directory 1",
-            "dst": "output directory 1",
+            "src": "~/foo/bar",
+            "dst": "~/baz/bar",
             "last_sync_time": null
         },
         {
-            "src": "input directory 1",
-            "dst": "output directory 1",
+            "src": "/parent/dir",
+            "dst": "~/other_dir",
             "last_sync_time": null
         }
     ]
 }
 ```
 
-Then, just run `sync.py`! It will display the last sync times for each folder
-and prompt you for confirmation before copying all the files in each of the
-folders to the destination.
+Then, just run `file_mirror.py`! It will display the last sync time for each
+folder and prompt you for confirmation before copying all the files in each of
+the folders to the destination.
 
 ## Development
 
