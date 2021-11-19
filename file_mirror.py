@@ -62,7 +62,7 @@ def main(raw_args: List[str]) -> None:
                 file=sys.stderr,
             )
 
-    # If yes, run `rsync <src>/ <dst> --archive --delete --verbose`
+    # If yes, run rsync
     for copy_spec in config["copy_specs"]:
         src = pathlib.Path(copy_spec["src"]).expanduser()
         dst = pathlib.Path(copy_spec["dst"]).expanduser()
@@ -76,10 +76,22 @@ def main(raw_args: List[str]) -> None:
             src_arg = f"{str(src)}/"
             # Use --archive to preserve permissions and timestamps
             # Use --delete to delete files that are no longer in the source
+            # Use --ignore-errors to ignore errors when copying files
             subprocess.run(
-                ["rsync", src_arg, dst, "--archive", "--delete", "--verbose"],
+                [
+                    "rsync",
+                    src_arg,
+                    dst,
+                    "--archive",
+                    "--delete",
+                    "--ignore-errors",
+                    "--verbose",
+                ],
                 check=True,
             )
+            # TODO: Update the last_sync_time in the config file after each
+            # successful file transfer, do not fail all mirroring if one
+            # copy spec fails.
         except subprocess.CalledProcessError as exc:
             print(f"rsync failed: {exc}", file=sys.stderr)
             sys.exit(1)
